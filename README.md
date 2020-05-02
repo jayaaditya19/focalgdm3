@@ -14,10 +14,10 @@ run the below command with root priviliges
 
 ![setting of login screen background with Image](https://i.stack.imgur.com/tL8Rq.gif)
 
-![result of Image](https://i.stack.imgur.com/1QcP2.jpg)
+![result of Image](https://i.stack.imgur.com/ssYjj.png)
 
 ![setting of login screen background with color](https://i.stack.imgur.com/vAWf1.gif)
 
-![result of color](https://i.stack.imgur.com/5UETs.jpg)
+![result of color](https://i.stack.imgur.com/KmliD.png)
 
 
