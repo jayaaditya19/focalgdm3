@@ -16,8 +16,10 @@ run the below command with root priviliges
 
 ![result of Image](https://i.stack.imgur.com/ssYjj.png)
 
+![result of Image with OSK](https://i.stack.imgur.com/xcpwT.png)
+
 ![setting of login screen background with color](https://i.stack.imgur.com/vAWf1.gif)
 
 ![result of color](https://i.stack.imgur.com/KmliD.png)
 
-
+![result of color with OSK](https://i.stack.imgur.com/TFWP5.png)
