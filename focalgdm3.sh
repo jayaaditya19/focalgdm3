@@ -40,9 +40,9 @@ fi
 echo "
 -------------------------------------------------------------------------------------------------------
 Please note that after setting login screen background,
-Reboot is highly recomonded to see the changes If you running this script for the first time.
+Reboot is highly recomonded to see the changes If you are running this script for the first time.
 
->>>>>>>>>Next time onwards logout will show you the changed background, No need of Reboot.<<<<<<<<<<<<
+>>>>>>>>>Next time onwards logout will show you the changed background, No need for Reboot.<<<<<<<<<<<<
 
 Do you want to proceed now? [Yes/no] Type n to exit, or press enter to proceed.
 -------------------------------------------------------------------------------------------------------"
@@ -128,7 +128,6 @@ Please notedown the correct file path of the Image and then run this script.
 	fi
 fi
 
-source="/usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource"
 prefix="/org/gnome/shell/theme"
 dest="/usr/local/share/gnome-shell/theme/focalgdm3"
 
