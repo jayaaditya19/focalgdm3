@@ -6,7 +6,7 @@ this script is to change the login screen background of Ubuntu 20.04 only.
 
 you can download the `focalgdm3` file via command line
 
-    wget https://raw.githubusercontent.com/PRATAP-KUMAR/focalgdm3/master/focalgdm3
+    wget -qO - https://github.com/PRATAP-KUMAR/focalgdm3/archive/master.tar.gz | tar zx --strip-components=1 focalgdm3-master/focalgdm3
 
 Once you downloaded the script `focalgdm3`. cd to the downloaded script file.
 
