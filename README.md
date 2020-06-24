@@ -17,7 +17,7 @@ to reset everything that the script made
 run the below command with root priviliges
 `./focalgdm3 --reset`
 
-![setting of login screen background with Image](https://i.stack.imgur.com/OsXAH.gif)
+![setting of login screen background with Image](https://i.stack.imgur.com/OeuO5.gif)
 
 ![result of Image](https://i.stack.imgur.com/ssYjj.png)
 
