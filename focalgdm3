@@ -32,7 +32,7 @@ case "$1" in ###################################################################
 ############################################################################################
 echo "Use the options /absolute/Image/path or valid 'HEXColorCode' like below
 		example 1: sudo ./focalgdm3 /home/admin/mybg.jpg
-		example 2: sudo ./focalgdm3 \#245678
+		example 2: sudo ./focalgdm3 \#245678"
 exit 1
 ;;
 ############################################################################################
