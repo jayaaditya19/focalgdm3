@@ -28,8 +28,50 @@ fi
 ############################################################################################
 case "$1" in ###############################################################################
 ############################################################################################
---set)
+--help) ####################################################################################
 ############################################################################################
+echo "Use the options '/absolute/Image/path' or valid 'HEXColorCode' like below
+		example 1: sudo ./focalgdm3 '/home/admin/my bg.jpg'
+		example 2: sudo ./focalgdm3 '#245678'"
+exit 1
+;;
+############################################################################################
+--reset) ###################################################################################
+############################################################################################
+
+if ! [ -e /usr/local/share/gnome-shell/theme/focalgdm3.gresource ]
+then
+echo "
+-----------------------------------------------------------------------------
+No need, Already Reset. (or unlikely background is not set using this Script.)
+-----------------------------------------------------------------------------"
+exit 1
+elif [ "$UID" != "0" ]
+then
+echo "This Script must be run with sudo"
+exit 1
+else
+rm /usr/local/share/gnome-shell/theme/focalgdm3.gresource
+update-alternatives --quiet --set gdm3-theme.gresource "$source"
+cd /usr/local/share
+rmdir --ignore-fail-on-non-empty -p gnome-shell/theme
+echo "
+				     		---------------
+						|Reset Success|
+						---------------
+				Changes will be effective after a Reboot"
+exit 1
+fi
+;;
+esac
+
+if [ -z "$1" ]
+then
+echo "Use the options '/absolute/Image/path' or valid 'HEXColorCode' like below
+		example 1: sudo ./focalgdm3 '/home/admin/my bg.jpg'
+		example 2: sudo ./focalgdm3 '#245678'"
+exit 1
+fi
 
 if [ "$UID" != "0" ]
 then
@@ -37,94 +79,21 @@ echo "This Script must be run with sudo"
 exit 1
 fi
 
-echo "
--------------------------------------------------------------------------------------------------------
-Please note that after setting login screen background,
->>>>>>>>> Reboot is highly recomonded to see the changes <<<<<<<<<<<<
+cd /tmp
 
-Do you want to proceed now? [Yes/no] Type n to exit, or press enter to proceed.
--------------------------------------------------------------------------------------------------------"
-read answer
-
-if [ "$answer" == "n" ] || [ "$answer" == "N" ]
+if ! [ -e "$1" ] && ! [[ "$1" =~ ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$ ]]
 then
-echo "Exiting..."
+echo "provided option '$1' is niether valid '/absolute/Image/path' nor valid 'HEX Color Code'
+Exiting without any changes.."
 exit 1
 fi
 
-echo "
-Please Choose any one number from below.
--------------
-1. for Image
-2. for Color
--------------"
-read a
-
-if [ -z $a ]
+if [ -e "$1" ]
 then
-echo "Option is not selected.
-Exiting..."
-exit 1
-fi
-
-if [ "$a" == "1" ]
-then
-echo "Enter Image Path for Login Screen
-----------------------------------------------------
-Example1: /usr/share/backgrounds/2.jpg
-Example2: /usr/local/share/backgrounds/spaceship.png
-Example3: /home/focal/Downloads/myBG.jpeg
-----------------------------------------------------"
-read b
-
-elif [ "$a" == "2" ]
-then
-echo "
-Enter Hex Color Code for Login Screen (you may note down colors of your choice from this link https://www.color-hex.com/)
--------------------------------------------------------------------------------------------------------------------------
-Example1: #00ff00
-Example2: #fca
-Example3: #456789
-Example4: #123
-Example5: #FF00FF
--------------------------------------------------------------------------------------------------------------------------"
-read c
-fi
-
-if [ -z $b ] && [ -z $c ]
-then
-echo "Input is not Provided.
-Exiting..."
-exit 1
-fi
-
-if [ -z $c ]
-then
-color="#042320"
+color='#042320'
+img="'file://$1'"
 else
-color="$c"
-fi
-
-if ! [ -z $c ]
-then
-    	if ! [[ $c =~ ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$ ]]; then
-    	echo "
-------------------------------------------------------------------------------------------------------------
-    	Sorry it is not a valid Hex color, Please choose the valid HEX color first and then run this script.
-------------------------------------------------------------------------------------------------------------"
-    	exit 1
-    	fi
-fi
-
-if ! [ -z $b ]
-then
-	if ! [ -e $b ]; then
-	echo "
----------------------------------------------------------------------------------------------------
-Image path you entered does not exist, script defined background color is going to be used for now.
-Please notedown the correct file path of the Image and then run this script.
----------------------------------------------------------------------------------------------------"
-	fi
+color=$1
 fi
 
 prefix="/org/gnome/shell/theme"
@@ -155,9 +124,9 @@ gresource extract $source $prefix/icons/scalable/actions/eye-open-negative-fille
 
 echo '@import url("resource:///org/gnome/shell/theme/original.css");
   #lockDialogGroup {
-  background: '$color' url(file://'$b');
+  background: '$color' url('$img');
   background-repeat: no-repeat;
-  background-size: cover;;
+  background-size: cover;
   background-position: center; }' > $dest/gdm3.css
 
 echo '<?xml version="1.0" encoding="UTF-8"?>
@@ -188,7 +157,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 cd $dest
 glib-compile-resources focalgdm3.gresource.xml
 mv focalgdm3.gresource ..
-rm -r $dest
+#rm -r $dest
 update-alternatives --quiet --install /usr/share/gnome-shell/gdm3-theme.gresource gdm3-theme.gresource /usr/local/share/gnome-shell/theme/focalgdm3.gresource 0
 update-alternatives --quiet --set gdm3-theme.gresource /usr/local/share/gnome-shell/theme/focalgdm3.gresource
 
@@ -198,37 +167,9 @@ then
 echo "
 				     		---------
 						|Success|
-						---------"
+						---------
+				  Changes will be effective after a Reboot"
 else
 echo Failure
 exit 1
 fi
-;;
-############################################################################################
---reset) ###################################################################################
-############################################################################################
-
-if [ -e /usr/local/share/gnome-shell/theme/focalgdm3.gresource ]
-then
-rm /usr/local/share/gnome-shell/theme/focalgdm3.gresource
-update-alternatives --quiet --set gdm3-theme.gresource "$source"
-cd /usr/local/share
-rmdir --ignore-fail-on-non-empty -p gnome-shell/theme
-echo "
-				     		---------------
-						|Reset Success|
-						---------------"
-else
-echo "
------------------------------------------------------------------------------
-No need, Already Reset. (or unlikely background is not set using this Script.)
------------------------------------------------------------------------------"
-exit 1
-fi
-;;
-############################################################################################
-*) #########################################################################################
-############################################################################################
-echo "Use the parameter '--set' or '--reset'; example: './focalgdm3 --set' or './focalgdm3 --reset'"
-exit 1
-esac
