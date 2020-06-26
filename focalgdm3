@@ -30,8 +30,8 @@ case "$1" in ###################################################################
 ############################################################################################
 --help) ####################################################################################
 ############################################################################################
-echo "Use the options '/absolute/Image/path' or valid 'HEXColorCode' like below
-		example 1: sudo ./focalgdm3 '/home/admin/my bg.jpg'
+echo "Use the options /absolute/Image/path or valid 'HEXColorCode' like below
+		example 1: sudo ./focalgdm3 /home/admin/my bg.jpg
 		example 2: sudo ./focalgdm3 '#245678'"
 exit 1
 ;;
@@ -39,7 +39,7 @@ exit 1
 --reset) ###################################################################################
 ############################################################################################
 
-if ! [ -e /usr/local/share/gnome-shell/theme/focalgdm3.gresource ]
+if ! [ -f /usr/local/share/gnome-shell/theme/focalgdm3.gresource ]
 then
 echo "
 -----------------------------------------------------------------------------
@@ -67,8 +67,8 @@ esac
 
 if [ -z "$1" ]
 then
-echo "Use the options '/absolute/Image/path' or valid 'HEXColorCode' like below
-		example 1: sudo ./focalgdm3 '/home/admin/my bg.jpg'
+echo "Use the options /absolute/Image/path or valid 'HEXColorCode' like below
+		example 1: sudo ./focalgdm3 /home/admin/mybg.jpg
 		example 2: sudo ./focalgdm3 '#245678'"
 exit 1
 fi
@@ -81,14 +81,14 @@ fi
 
 cd /tmp
 
-if ! [ -e "$1" ] && ! [[ "$1" =~ ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$ ]]
+if ! [ -f "$1" ] && ! [[ $1 =~ ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$ ]]
 then
-echo "provided option '$1' is niether valid '/absolute/Image/path' nor valid 'HEX Color Code'
+echo "provided option '$1' is niether valid /absolute/Image/path nor valid 'HEX Color Code'
 Exiting without any changes.."
 exit 1
 fi
 
-if [ -e "$1" ]
+if [ -f "$1" ]
 then
 color='#042320'
 img="'file://$1'"
