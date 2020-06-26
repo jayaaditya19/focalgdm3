@@ -11,10 +11,10 @@ you can download the `focalgdm3` file via command line
 Once you downloaded the script `focalgdm3`. cd to the downloaded script file.
 
 to set the background with Image  
-`sudo ./focalgdm3 '/absolute/path/to/image'`
+`sudo ./focalgdm3 /absolute/path/to/image`
 
 to set the background with color  
-`sudo ./focalgdm3 '#aAbBcC'` replace `'#aAbBcC'` with any vaid hex color code..
+`sudo ./focalgdm3 \#aAbBcC` replace `#aAbBcC` with any vaid hex color code..
 
 to reset everything that the script made..  
 `sudo ./focalgdm3 --reset`
