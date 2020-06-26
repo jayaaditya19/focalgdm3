@@ -31,8 +31,8 @@ case "$1" in ###################################################################
 --help) ####################################################################################
 ############################################################################################
 echo "Use the options /absolute/Image/path or valid 'HEXColorCode' like below
-		example 1: sudo ./focalgdm3 /home/admin/my bg.jpg
-		example 2: sudo ./focalgdm3 '#245678'"
+		example 1: sudo ./focalgdm3 /home/admin/mybg.jpg
+		example 2: sudo ./focalgdm3 \#245678
 exit 1
 ;;
 ############################################################################################
@@ -67,9 +67,9 @@ esac
 
 if [ -z "$1" ]
 then
-echo "Use the options /absolute/Image/path or valid 'HEXColorCode' like below
+echo "Use the options /absolute/Image/path or valid HEXColorCode like below
 		example 1: sudo ./focalgdm3 /home/admin/mybg.jpg
-		example 2: sudo ./focalgdm3 '#245678'"
+		example 2: sudo ./focalgdm3 \#245678
 exit 1
 fi
 
@@ -157,7 +157,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 cd $dest
 glib-compile-resources focalgdm3.gresource.xml
 mv focalgdm3.gresource ..
-#rm -r $dest
+rm -r $dest
 update-alternatives --quiet --install /usr/share/gnome-shell/gdm3-theme.gresource gdm3-theme.gresource /usr/local/share/gnome-shell/theme/focalgdm3.gresource 0
 update-alternatives --quiet --set gdm3-theme.gresource /usr/local/share/gnome-shell/theme/focalgdm3.gresource
 
