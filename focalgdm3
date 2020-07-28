@@ -1,8 +1,9 @@
 #!/bin/bash
 
 codename=$(cat /etc/os-release | grep UBUNTU_CODENAME | cut -d = -f 2)
+osname=$(cat /etc/os-release | grep '="Ubuntu"' | cut -d = -f 2)
 
-if [ "$codename" == "focal" ]
+if [ "$codename" == "focal" ] && [ "$osname" == '"Ubuntu"' ]
 then
 source="/usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource"
 else
@@ -25,6 +26,8 @@ For now, Exiting...
 exit 1
 fi
 
+dest="/usr/local/share/gnome-shell/theme/custom"
+
 ############################################################################################
 case "$1" in ###############################################################################
 ############################################################################################
@@ -39,7 +42,7 @@ exit 1
 --reset) ###################################################################################
 ############################################################################################
 
-if ! [ -f /usr/local/share/gnome-shell/theme/focalgdm3.gresource ]
+if ! [ -f $dest/custom-gnome-shell-theme.gresource ]
 then
 echo "
 -----------------------------------------------------------------------------
@@ -51,10 +54,10 @@ then
 echo "This Script must be run with sudo"
 exit 1
 else
-rm /usr/local/share/gnome-shell/theme/focalgdm3.gresource
+rm $dest/custom-gnome-shell-theme.gresource
 update-alternatives --quiet --set gdm3-theme.gresource "$source"
 cd /usr/local/share
-rmdir --ignore-fail-on-non-empty -p gnome-shell/theme
+rmdir --ignore-fail-on-non-empty -p gnome-shell/theme/custom
 echo "
 				     		---------------
 						|Reset Success|
@@ -97,10 +100,9 @@ color=$1
 fi
 
 prefix="/org/gnome/shell/theme"
-dest="/usr/local/share/gnome-shell/theme/focalgdm3"
 
 install -D /dev/null $dest/gdm3.css
-install -D /dev/null $dest/focalgdm3.gresource.xml
+install -D /dev/null $dest/custom-gnome-shell-theme.gresource.xml
 install -d $dest/icons/scalable/actions
 
 gresource extract $source $prefix/gdm3.css > $dest/original.css
@@ -127,8 +129,12 @@ echo '@import url("resource:///org/gnome/shell/theme/original.css");
   background: '$color' url('$img');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center; }' > $dest/gdm3.css
-
+  background-position: center; }
+  
+  StEntry StIcon.peek-password {
+  icon-size: 1px;
+  padding: 0 4px; }' > $dest/gdm3.css
+  
 echo '<?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gnome/shell/theme">
@@ -152,16 +158,18 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
     <file>icons/scalable/actions/pointer-double-click-symbolic.svg</file>
     <file>icons/scalable/actions/eye-open-negative-filled-symbolic.svg</file>
   </gresource>
-</gresources>' > $dest/focalgdm3.gresource.xml
+</gresources>' > $dest/custom-gnome-shell-theme.gresource.xml
 
 cd $dest
-glib-compile-resources focalgdm3.gresource.xml
-mv focalgdm3.gresource ..
-rm -r $dest
-update-alternatives --quiet --install /usr/share/gnome-shell/gdm3-theme.gresource gdm3-theme.gresource /usr/local/share/gnome-shell/theme/focalgdm3.gresource 0
-update-alternatives --quiet --set gdm3-theme.gresource /usr/local/share/gnome-shell/theme/focalgdm3.gresource
+glib-compile-resources custom-gnome-shell-theme.gresource.xml
+mv custom-gnome-shell-theme.gresource ..
+rm -r $dest/*
+cd ..
+mv custom-gnome-shell-theme.gresource $dest
+update-alternatives --quiet --install /usr/share/gnome-shell/gdm3-theme.gresource gdm3-theme.gresource $dest/custom-gnome-shell-theme.gresource 0
+update-alternatives --quiet --set gdm3-theme.gresource $dest/custom-gnome-shell-theme.gresource
 
-check=$(update-alternatives --query gdm3-theme.gresource | grep Value | grep /usr/local/share/gnome-shell/theme/focalgdm3.gresource >/dev/null && echo "pass" || echo "fail")
+check=$(update-alternatives --query gdm3-theme.gresource | grep Value | grep $dest/custom-gnome-shell-theme.gresource >/dev/null && echo "pass" || echo "fail")
 if [ "$check" == "pass" ]
 then
 echo "
