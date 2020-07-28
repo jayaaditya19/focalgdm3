@@ -1,8 +1,10 @@
 #!/bin/bash
 
 codename=$(cat /etc/os-release | grep UBUNTU_CODENAME | cut -d = -f 2)
+osname=$(cat /etc/os-release | grep '="Ubuntu"' | cut -d = -f 2)
 
-if [ "$codename" == "focal" ]
+if [ "$codename" == "focal" ] && [ "$osname" == '"Ubuntu"' ]
+
 then
 source="/usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource"
 else
