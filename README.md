@@ -21,8 +21,4 @@ to reset everything that the script made..
 
 ![result of Image](https://i.stack.imgur.com/ssYjj.png)
 
-![result of Image with OSK](https://i.stack.imgur.com/xcpwT.png)
-
 ![result of color](https://i.stack.imgur.com/KmliD.png)
-
-![result of color with OSK](https://i.stack.imgur.com/TFWP5.png)
