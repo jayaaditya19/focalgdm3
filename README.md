@@ -1,7 +1,9 @@
 
-# This script assumes that the Installation of Ubuntu 20.04 is a fresh install. If you tried to change the GDM background with someother scripts, you first need to reset those changes. Other scripts may have the option --reset.
-
 # focalgdm3
+
+_**This script assumes that the Installation of Ubuntu 20.04 is a fresh install. If you tried to change the GDM background with someother scripts, you first need to reset those changes. Other scripts may have the option --reset.
+Change the login screen background for Ubuntu 20.04 only.**__
+
 Change the login screen background for Ubuntu 20.04 only.
 
 this script is to change the login screen background of Ubuntu 20.04 only.
