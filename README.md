@@ -1,7 +1,7 @@
 
 # focalgdm3
 
-_**This script assumes that the Installation of Ubuntu 20.04 is a fresh install. If you tried to change the GDM background with someother scripts, you first need to reset those changes. Other scripts may have the option --reset.**_
+_**This script assumes that the Installation of Ubuntu 20.xx is a fresh install. If you tried to change the GDM background with someother scripts, you first need to reset those changes. Other scripts may have the option --reset.**_
 
 _**Recommended: Please have a look on the 'TrailRun' Branch for single line commands like below**_
 ````
