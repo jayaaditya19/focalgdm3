@@ -45,7 +45,7 @@ case "$1" in ###################################################################
 echo "
 -------------------------------------------------------------------------------------------------------
 Please note that after setting login screen background,
->>>>>>>>> Reboot is highly recomonded to see the changes <<<<<<<<<<<<
+>>>>>>>>> Reboot is highly recommended to see the changes <<<<<<<<<<<<
 
 Do you want to proceed now? [Yes/no] Type n to exit, or press enter to proceed.
 -------------------------------------------------------------------------------------------------------"
