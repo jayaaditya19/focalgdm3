@@ -2,7 +2,7 @@
 
 codename=$(cat /etc/os-release | grep UBUNTU_CODENAME | cut -d = -f 2)
 
-if [ "$codename" == "focal" ] || [ "$codename" == "groovy" ]
+if [ "$codename" == "focal" ] || [ "$codename" == "groovy" ] || ["$codename" == "hirsute" ]
 then
 source="/usr/share/gnome-shell/theme/Yaru/gnome-shell-theme.gresource"
 else
