@@ -83,19 +83,19 @@ fi
 
 cd /tmp
 
-if ! [ -f "$1" ] && ! [[ $1 =~ ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$ ]]
+if ! [ -f "$2" ] && ! [[ $2 =~ ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$ ]]
 then
 echo "provided option '$1' is niether valid /absolute/Image/path nor valid 'HEX Color Code'
 Exiting without any changes.."
 exit 1
 fi
 
-if [ -f "$1" ]
+if [ -f "$2" ]
 then
 color='#042320'
-img="'file://$1'"
+img="'file://$2'"
 else
-color=$1
+color=$2
 fi
 
 prefix="/org/gnome/shell/theme"
@@ -148,7 +148,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
     <file>icons/scalable/actions/pointer-secondary-click-symbolic.svg</file>
     <file>icons/scalable/actions/keyboard-shift-filled-symbolic.svg</file>
     <file>icons/scalable/actions/keyboard-caps-lock-filled-symbolic.svg</file>
-    <file>icons/scalable/actions/pointer-primary-click-symbolic.svg</file>
+    <file>icons/scalable/actions/pointer-primary-click-symbolic.svg</file> 
     <file>icons/scalable/actions/keyboard-layout-filled-symbolic.svg</file>
     <file>icons/scalable/actions/eye-not-looking-symbolic.svg</file>
     <file>icons/scalable/actions/pointer-double-click-symbolic.svg</file>
